@@ -6,10 +6,14 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Login } from "./pages/login";
+import { Private } from "./pages/private";
+import { Signup } from "./pages/singup";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
+
 
 //create your first component
 const Layout = () => {
@@ -34,6 +38,12 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/signup">
+							<Signup />
+						</Route>
+						<Route exact path="/private">
+							<Private />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      email: null,
+      password: null,
       token: null,
       message: null,
       demo: [
@@ -64,7 +66,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore: ({ token: data.access_token });
           return true;
         } catch (error) {
-          console.log("there an error while logiining in");
+          console.log("there an error while logging in");
+        }
+      },
+      signup: async (email, password) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "email": email,
+            "password": password
+          }),
+        };
+        try {
+          const resp = await fetch(
+            "https://3001-4geeksacademy-reactflask-ounqekb4moh.ws-us38.gitpod.io/api/signup",
+            opts
+          );
+          if (resp.status !== 200) {
+            alert("there has been an error");
+            return false;
+          }
+
+          const data = await resp.json();
+          console.log("this came from the backend", data);
+          return true;
+        } catch (error) {
+          console.log("there an error while Signing in");
         }
       },
       getMessage: () => {

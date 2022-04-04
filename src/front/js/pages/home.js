@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
@@ -18,7 +19,9 @@ export const Home = () => {
 			<div className="alert alert-info">
 				{store.message}
 			</div>
-			
+			<Link to ="private">
+            <button> Go to Private </button>
+            </Link>
 			<p>
 				This boilerplate comes with lots of documentation:{" "}
 				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
