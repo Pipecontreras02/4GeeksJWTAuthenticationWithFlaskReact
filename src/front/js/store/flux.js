@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       email: null,
       password: null,
-      token: null,
+      token: "",
       message: null,
       demo: [
         {
@@ -47,12 +47,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             email: email,
-            password: password
+            password: password,
           }),
         };
         try {
           const resp = await fetch(
-            "https://3001-4geeksacademy-reactflask-ounqekb4moh.ws-us38.gitpod.io/api/token",
+            process.env.BACKEND_URL + "/api/token",
             opts
           );
           if (resp.status !== 200) {
@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           console.log("this came from the backend", data);
           sessionStorage.setItem("token", data.access_token);
-          setStore: ({ token: data.access_token });
+          setStore({token : data.access_token});
           return true;
         } catch (error) {
           console.log("there an error while logging in");
@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         try {
           const resp = await fetch(
-            "https://3001-4geeksacademy-reactflask-ounqekb4moh.ws-us38.gitpod.io/api/signup",
+            process.env.BACKEND_URL +"/api/signup",
             opts
           );
           if (resp.status !== 200) {
@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
 
         // fetching data from the backend
-        fetch("https://3001-4geeksacademy-reactflask-ounqekb4moh.ws-us38.gitpod.io/api/hello", opts)
+        fetch(process.env.BACKEND_URL + "/api/hello", opts)
           .then((resp) => resp.json())
           .then((data) => setStore({ message: data.message }))
           .catch((error) =>
